@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Журавский](https://up.htmlacademy.ru/javascript/15/user/110311).
-* Наставник: `Неизвестно`.
+* Наставник: [нет].
 
 ---
 
