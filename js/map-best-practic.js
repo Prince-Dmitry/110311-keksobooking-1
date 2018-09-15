@@ -85,9 +85,15 @@ var getRandomFeatures = function (array) {
   return array;
 };
 
+var getRandomArr = function (count) {
+  var array = [];
+  for (var i = 0; i < count; i++) {
+    array[i] = i;
+  }
+  return array.sort(compareRandom);
+};
 
-
-
+var avatarNumbers = getRandomArr(NUMBER);
 
 // создаёт объект
 
@@ -97,7 +103,7 @@ var createObject = function () {
   var locationY = getRandom(MAP_Y_MIN, MAP_Y_MAX);
   return {
     author: {
-      avatar: 'img/avatars/user0' + getRandomTitles(IMAGE_NUM_RANGES) + '.png'
+      avatar: 'img/avatars/user0' + avatarNumbers.toString() + '.png'
     },
 
     offer: {
