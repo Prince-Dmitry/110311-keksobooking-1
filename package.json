@@ -1,9 +1,8 @@
 {
   "name": "keksobooking",
-  "version": "1.0.0",
+  "version": "15.0.0",
   "private": true,
   "description": "Личный проект «Кексобукинг» от HTML Academy",
-  "author": "Дмитрий Журавский",
   "repository": {
     "type": "git",
     "url": "git@github.com:htmlacademy-javascript/110311-keksobooking.git"
@@ -12,8 +11,8 @@
     "url": "https://github.com/htmlacademy-javascript/110311-keksobooking/issues"
   },
   "devDependencies": {
-    "eslint": "4.2.0",
-    "eslint-config-htmlacademy": "0.3.x"
+    "eslint": "4.19.1",
+    "eslint-config-htmlacademy": "0.5.2"
   },
   "license": "MIT",
   "dependencies": {},
@@ -21,6 +20,6 @@
     "test": "eslint js/"
   },
   "engines": {
-    "node": "^6.10"
+    "node": "8.11"
   }
 }
