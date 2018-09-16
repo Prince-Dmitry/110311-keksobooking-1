@@ -303,3 +303,76 @@ for (var e = 0; e < pinElements.length; e++) {
 
 cardsClose.addEventListener('click', closeCard);
 cardsClose.addEventListener('keydown', onCloseEnterPress);
+
+
+var RoomCount = {
+  ONE: 1,
+  TWO: 2,
+  THREE: 3,
+  HUNDRED: 100
+};
+var Capacity = {
+  ONE_GUEST: 1,
+  TWO_GUESTS: 2,
+  THREE_GUESTS: 3,
+  NOT_FOR_GUESTS: 0,
+};
+
+var FormTitle = {
+  MIN: 30,
+  MAX: 100
+};
+var FormValidityMessage = {
+  TITLE: 'Введите от 30 до 100 символов.',
+  PRICE: 'Укажите желаемую стоимость номера',
+};
+
+var hostFormTitle = hostForm.querySelector('#title');
+var hostFormPrice = hostForm.querySelector('#price');
+var hostFormAddress = hostForm.querySelector('#address');
+var hostFormType = hostForm.querySelector('#type');
+var hostTimeSelect = hostForm.querySelectorAll('.ad-form__element--time select');
+var hostRooms = hostForm.querySelector('#room_number');
+var hostPlaces = hostForm.querySelector('#capacity');
+var hostPlacesItems = hostPlaces.querySelectorAll('option');
+
+var setAdressFieldValue = function (pinX, pinY) {
+  hostFormAddress.value = pinX + ', ' + pinY;
+};
+  /**
+ * Render host pins and remove disabled classes from search form.
+ * Updates adress field coordinates value.
+ */
+var setPageActive = function () {
+  hostsMap.classList.remove('map--faded');
+  hostForm.classList.remove('ad-form--disabled');
+  toggleFields(false);
+  setAdressFieldValue(mainPinX - Pin.MAIN_GAP, mainPinY - Pin.MAIN_GAP);
+  renderHostsList();
+  initHostForm();
+};
+
+var setHostMinPrice = function () {
+  var minCost = getHostType(hostType.value).minCost;
+  var minCost = getHostType(hostFormType.value).minCost;
+  hostPrice.min = minCost;
+  hostPrice.placeholder = minCost;
+  hostFormPrice.min = minCost;
+  hostFormPrice.placeholder = minCost;
+};
+
+var hostRoomCheck = function () {
+  hostPlacesItems.forEach(function (item, i) {
+    var room = Number(hostRooms.value);
+    var capacity = Number(item.value);
+    hostPlacesItems[i].disabled = false;
+    if (room === RoomCount.ONE && capacity !== Capacity.ONE_GUEST
+      || room === RoomCount.TWO && (capacity !== Capacity.ONE_GUEST
+        && capacity !== Capacity.TWO_GUESTS)
+      || room === RoomCount.THREE && capacity === Capacity.NOT_FOR_GUESTS
+      || room === RoomCount.HUNDRED && capacity !== Capacity.NOT_FOR_GUESTS) {
+      item.disabled = true;
+    }
+    hostPlaces.value = (room === 100) ? 0 : room;
+  });
+};
