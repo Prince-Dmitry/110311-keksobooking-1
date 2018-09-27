@@ -93,14 +93,13 @@ var getRandomArr = function (count) {
   return array.sort(compareRandom);
 };
 
-var avatarNumbers = getRandomArr(NUMBER);
-
 // создаёт объект
 
 var createObject = function () {
 
   var locationX = getRandom(MAP_X_MIN, MAP_X_MAX);
   var locationY = getRandom(MAP_Y_MIN, MAP_Y_MAX);
+  var avatarNumbers = getRandomArr(NUMBER);
   return {
     author: {
       avatar: 'img/avatars/user0' + avatarNumbers.toString() + '.png'
