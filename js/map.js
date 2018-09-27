@@ -55,7 +55,7 @@ var mapPins;
 var mapElement = document.querySelector('.map');
 var similarListButtons = document.querySelector('.map .map__pins');
 var mapFilter = document.querySelector('.map .map__filters-container');
-var noticeFormElement = document.querySelector('.notice__form');
+var noticeFormElement = document.querySelector('.notice');
 var noticeFormFieldsetElements = noticeFormElement.querySelectorAll('fieldset');
 var mapFilters = mapElement.querySelector('.map__filters-container');
 var mapPinsListElement = document.querySelector('.map__pins');
