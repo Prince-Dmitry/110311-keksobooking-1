@@ -57,12 +57,12 @@ var mapElement = document.querySelector('.map');
 var mapPinsListElement = mapElement.querySelector('.map__pins');
 var mapPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 var mapCardTemplate = document.querySelector('template').content.querySelector('article.map__card');
-var noticeFormElement = document.querySelector('.notice__form');
+var noticeFormElement = document.querySelector('.notice');
 var noticeFormFieldsetElements = noticeFormElement.querySelectorAll('fieldset');
-var featuresList = card.querySelectorAll('.feature');
+var featuresList = card.querySelectorAll('.popup__feature');
 var mapFilters = mapElement.querySelector('.map__filters-container');
-var mapPinMainElement = mapElement.querySelector('.map__pin--main');
-var pinElements = mapPinMainElement.querySelectorAll('.map__pin:not(.map__pin--main)');
+var mapPinMainElement = mapElement.querySelector('.map__pin');
+var pinElements = mapPinMainElement.querySelectorAll('.map__pin:not(.map__pin)');
 
 
 var getRandom = function (min, max) {
