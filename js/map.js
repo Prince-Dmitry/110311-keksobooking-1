@@ -288,29 +288,17 @@ function onMapMouseUp() {
   mapPinMain.removeEventListener('mouseup', onMapMouseUp); // отписываемся от события
 }
 
-// DOM-объект с блоком карты
 var mapShow = document.querySelector('.map');
-// DOM-объект с формой заполнения объявления
 var adForm = document.querySelector('.ad-form');
-// DOM-объект с формой фильтрации объявлений
 var mapFiltes = document.querySelector('.map__filters');
-// DOM-объект метки объявлений
 var mapPinMain = document.querySelector('.map__pin--main');
-// элемент поля адреса в форме объявления
 var addressCoordinatePin = document.querySelector('#address');
-// блок, куда будут вставлены объекты (метки объявлений)
 var pinListElement = document.querySelector('.map__pins');
-// блок из шаблона, на основе которого будут добавлены метки объявлений
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-// блок, перед которым нужно вставить объявление
 var cardListElement = document.querySelector('.map__filters-container');
-// блок из шаблона, на основе которого будут добавлены карточки объявлений
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
-// устанавливаем неактивный режим формы
 formActivate(false);
-
 addressCoordinatePin.value = defineCoordinatePin(mapPinMain);
-
 mapPinMain.addEventListener('mouseup', onMapMouseUp);
 
