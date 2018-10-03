@@ -84,7 +84,6 @@
     advertizePrice.setAttribute('min', typeHousingMinPrice[evt.currentTarget.value]);
     advertizePrice.setAttribute('placeholder', typeHousingMinPrice[evt.currentTarget.value]);
   }
-
   // обработчик ошибок поля "стоимость жилья"
   function onAdvertizePriceInput(evt) {
     if (advertizePrice.validity.rangeUnderflow) {

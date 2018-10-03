@@ -58,8 +58,5 @@
     cardForEvent.addEventListener('click', cb);
 
     return cardElement;
-
   };
-
-
 })();

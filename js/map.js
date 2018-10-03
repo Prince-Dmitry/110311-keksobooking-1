@@ -259,5 +259,4 @@
   var errorHandler = function (errorMessage) {
     message.showMessageErrorSendForm('Ошибка! Объявления не были загружены ' + errorMessage);
   };
-
 })();
