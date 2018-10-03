@@ -28,9 +28,10 @@
     ' выезд до ' + objCard.offer.checkout;
 
     // выбираем все child-объекты (элементы жилья)
+
     var childElement = cardElement.querySelector('.popup__features').querySelectorAll('li');
-    for (var i = objCard.offer.features.length; i < window.data.aFeatures.length; i++) {
-      // Удаляемый элемент
+    for (var i = 0; i < data.aFeatures.length; i++) {
+    // Удаляемый элемент
       if (!~objCard.offer.features.indexOf(data.aFeatures[i])) {
         cardElement.querySelector('.popup__features').removeChild(childElement[i]);
       }
@@ -52,11 +53,16 @@
     } else {
       cardElement.removeChild(childElement);
     }
+
     cardElement.querySelector('.popup__avatar').setAttribute('src', objCard.author.avatar);
 
     var cardForEvent = cardElement.querySelector('.popup__close');
     cardForEvent.addEventListener('click', cb);
 
     return cardElement;
+
   };
+
+
 })();
+

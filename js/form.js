@@ -1,9 +1,9 @@
+// модуль работы с формой объявления
 'use strict';
 
 (function () {
 
-  var ESC_KEYCODE = 27;
-
+  // объект соответствия типа жилья и минимальной стоимости за ночь
   var typeHousingMinPrice = {
     flat: 1000,
     bungalo: 0,
@@ -15,7 +15,7 @@
   var map = window.map;
   // экспорт ф-ции relationNumberRoomsCapacity из модуля units.js
   var units = window.units;
-  // DOM-объект с формой заполнения объявления
+  // экспорт из модуля backend.js
   var backend = window.backend;
   // DOM-объект с формой заполнения объявления
   var message = window.message;
@@ -34,12 +34,6 @@
   var advertizeRoomNumber = document.querySelector('#room_number');
   // количество мест
   var advertizeCapacity = document.querySelector('#capacity');
-  // блок из шаблона, на основе которого будут выведено сообщение об успешной отправке формы
-  var templForm = document.querySelector('#success').content.querySelector('.success');
-  // блок, куда будет вставлен блок об успешной отправке формы
-  var elemForm = document.querySelector('main');
-  // блок с сообщением об успешном отправлении формы
-  var elemSuccess = document.querySelector('.success');
 
   advertizeType.addEventListener('change', onAdvertizeInputTypeChange);
   advertizeTimeIn.addEventListener('change', onAdvertizeTimeInOutChange);
@@ -59,8 +53,7 @@
   adForm.addEventListener('submit', function (evt) {
     // вывод сообщения об успешной отправке формы
   //  showMessage(elemForm, elemSuccess, templForm, '.success');
-    showMessageSuccessSendForm();
-    // делаем форму неактивной
+    // debugger;
     backend.save(new FormData(adForm), successHandler, errorHandler);
     evt.preventDefault();
   });
@@ -84,6 +77,7 @@
     advertizePrice.setAttribute('min', typeHousingMinPrice[evt.currentTarget.value]);
     advertizePrice.setAttribute('placeholder', typeHousingMinPrice[evt.currentTarget.value]);
   }
+
   // обработчик ошибок поля "стоимость жилья"
   function onAdvertizePriceInput(evt) {
     if (advertizePrice.validity.rangeUnderflow) {
@@ -146,19 +140,5 @@
     }
   }
 
-  function showMessageSuccessSendForm() {
-    elemForm.appendChild(templForm);
-    elemSuccess = document.querySelector('.success');
-
-    elemSuccess.addEventListener('click', function () {
-      elemForm.removeChild(elemSuccess);
-    });
-
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEYCODE) {
-        elemForm.removeChild(elemSuccess);
-      }
-    });
-  }
 
 })();
