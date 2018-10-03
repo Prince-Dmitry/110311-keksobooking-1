@@ -44,11 +44,15 @@
   // получаем объекты из модуля data.js
   var aAdvertize = window.data.aAdvertize;
   // получаем ф-цию renderPin из модуля render-рin
+  var data = window.data;
   var renderPin = window.renderPin;
   // получаем ф-цию renderCard из модуля render-card
   var renderCard = window.renderCard;
   // экспорт ф-ции relationNumberRoomsCapacity из модуля units.js
   var units = window.units;
+  var backend = window.backend;
+  // экспорт из модуля message.js
+  var message = window.message;
 
   // ф-ция для определения координаты x блока метки
   function getMapX(x) {
@@ -154,9 +158,8 @@
 
   // событие на перетаскивание метки объявления
   function onMapMouseUp() {
+    backend.load(successHandler, errorHandler); // загружаем данные с сервера и записываем в массив data.aAdvertize
     formActivate(true);
-    generatePins(); // загружаем все метки
-    loadCard(); // загружаем все объявления
     units.relationNumberRoomsCapacity(); // сразу запрещаем неправильные варианты кол-ва мест от выбранного кол-ва комнат
     mapPinMain.removeEventListener('mouseup', onMapMouseUp); // отписываемся от события
   }
@@ -199,19 +202,19 @@
       var tmpY = mapPinMain.offsetTop - shift.y;
       var tmpX = mapPinMain.offsetLeft - shift.x;
 
-      if (tmpY < window.data.MIN_Y) {
-        tmpY = window.data.MIN_Y + 'px';
-      } else if (tmpY > window.data.MAX_Y) {
-        tmpY = window.data.MAX_Y + 'px';
+      if (tmpY < data.MIN_Y) {
+        tmpY = data.MIN_Y + 'px';
+      } else if (tmpY > data.MAX_Y) {
+        tmpY = data.MAX_Y + 'px';
       } else {
         tmpY = tmpY + 'px';
       }
       mapPinMain.style.top = tmpY;
 
-      if (tmpX < window.data.MIN_X) {
-        tmpX = window.data.MIN_X + 'px';
-      } else if (tmpX > window.data.MAX_X) {
-        tmpX = window.data.MAX_X + 'px';
+      if (tmpX < data.MIN_X) {
+        tmpX = data.MIN_X + 'px';
+      } else if (tmpX > data.MAX_X) {
+        tmpX = data.MAX_X + 'px';
       } else {
         tmpX = tmpX + 'px';
       }
@@ -242,5 +245,19 @@
 
   // сбрасываем форму в начальное неактивное состояние
   window.map.initForm();
+
+  var successHandler = function (loadAdvertize) {
+    aAdvertize = [];
+    for (var ii = 0; ii < loadAdvertize.length; ii++) {
+      aAdvertize.push(loadAdvertize[ii]);
+      aAdvertize[ii].id = ii;
+    }
+    generatePins(); // загружаем все метки
+    loadCard(); // загружаем все объявления
+  };
+
+  var errorHandler = function (errorMessage) {
+    message.showMessageErrorSendForm('Ошибка! Объявления не были загружены ' + errorMessage);
+  };
 
 })();

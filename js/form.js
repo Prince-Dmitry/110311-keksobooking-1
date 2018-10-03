@@ -16,6 +16,9 @@
   // экспорт ф-ции relationNumberRoomsCapacity из модуля units.js
   var units = window.units;
   // DOM-объект с формой заполнения объявления
+  var backend = window.backend;
+  // DOM-объект с формой заполнения объявления
+  var message = window.message;
   var adForm = document.querySelector('.ad-form');
   // кнопка "очистить"
   var adFormReset = document.querySelector('.ad-form__reset');
@@ -58,16 +61,29 @@
   //  showMessage(elemForm, elemSuccess, templForm, '.success');
     showMessageSuccessSendForm();
     // делаем форму неактивной
-    map.initForm();
+    backend.save(new FormData(adForm), successHandler, errorHandler);
     evt.preventDefault();
   });
+
+  // ф-ция коллбек, выполнемая при успешной загрузке формы на сервер
+  var successHandler = function () {
+    // сообщение, что форма отправлена успешно
+    // showMess(elemForm, templForm, '.success');
+    message.showMessageSuccessSendForm();
+    // делаем форму неактивной
+    map.initForm();
+  };
+
+  var errorHandler = function (errorMessage) {
+  //    showMess(elemForm, templFormErr, '.error');
+    message.showMessageErrorSendForm(errorMessage);
+  };
 
   // обработчик при изменении типа жилья
   function onAdvertizeInputTypeChange(evt) {
     advertizePrice.setAttribute('min', typeHousingMinPrice[evt.currentTarget.value]);
     advertizePrice.setAttribute('placeholder', typeHousingMinPrice[evt.currentTarget.value]);
   }
-
 
   // обработчик ошибок поля "стоимость жилья"
   function onAdvertizePriceInput(evt) {
